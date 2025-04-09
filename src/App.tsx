@@ -1,7 +1,7 @@
 import TomenetLogo from './components/TomenetLogo';
 import ReturningStudents from './components/ReturningStudents'
+import MenuButton from './components/Menu';
 import backgroundVideo from "/HomepageBackground.webm";
-import MenuButton from './components/MenuButton';
 
 
 function App() {
@@ -17,6 +17,10 @@ function App() {
 
       <div className='absolute top-[50%] left-[48%] -translate-x-[50%] translate-y-[250%] max-w-[15%] drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]'>
         <ReturningStudents />
+      </div>
+
+      <div className='fixed top-[3%] left-[1%] drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]'>
+        <MenuButton />
       </div>
     </div>
   );
