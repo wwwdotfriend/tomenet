@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.tomenetShadow {
+    filter: drop-shadow(0px 0px 30px rgb(0 0 0 / 1));
+  }
