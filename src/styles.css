@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: College;
+  src: url('../src/assets/fonts/CollegeBoy.otf');
+}
+
 .tomenetShadow {
     filter: drop-shadow(0px 0px 30px rgb(0 0 0 / 1));
   }
