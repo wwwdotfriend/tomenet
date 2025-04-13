@@ -3,7 +3,8 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 function MenuButton() {
     return (
-        <button className="group relative inline-flex h-13 w-13 items-center justify-center rounded-[100%] bg-[#FBF5F1] transition-colors hover:bg-[#782F40]">
+        <button 
+            className="group relative inline-flex h-13 w-13 items-center justify-center rounded-[100%] bg-[#FBF5F1] transition-colors hover:bg-[#782F40]">
             <div>
                 <FontAwesomeIcon 
                     icon={faBars} 

@@ -2,9 +2,23 @@
 
 @font-face {
   font-family: College;
-  src: url('../src/assets/fonts/CollegeBoy.otf');
+  src: url(assets/fonts/CollegeBoy.otf)
+}
+
+@font-face {
+  font-family: Aoboshi;
+  src: url(assets/fonts/AoboshiOne.ttf)
 }
 
 .tomenetShadow {
   filter: drop-shadow(0px 0px 30px rgb(0 0 0 / 1));
+}
+
+.menuItem {
+  font-family: Aoboshi;
+}
+
+h1 {
+  font-family: Aoboshi;
+  font-size: 48px;
 }
