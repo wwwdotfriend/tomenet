@@ -1,11 +1,11 @@
 // components
-import TomenetLogo from './components/TomenetLogo';
-import Sidebar from './components/Sidebar';
+import TomenetLogo from '../components/TomenetLogo';
+import Sidebar from '../components/Sidebar';
 
 // assets
 import BackgroundVideo from "/HomepageBackground.webm";
 
-function App() {
+function Home() {
   return (
     <div className='flex relative w-screen h-screen overflow-hidden'>
       <video className='fixed w-screen h-screen object-cover -z-1' autoPlay loop muted>
@@ -32,4 +32,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;

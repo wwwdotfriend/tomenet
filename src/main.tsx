@@ -1,9 +1,41 @@
+// imports
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
+import { createBrowserRouter, RouterProvider } from 'react-router'
+
+// pages
+import Home from './pages/HomePage.tsx'
+import Academics from './pages/Academics.tsx'
+import CampusLife from './pages/CampusLife.tsx'
+import SocialHub from './pages/SocialHub.tsx'
+import MyTomeNet from './pages/MyTomeNet.tsx'
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home />,
+    // errorElement: <NotFoundPage />,
+  },
+  {
+    path:  '/academics',
+    element: <Academics />,
+  },
+  {
+    path:  '/campus-life',
+    element: <CampusLife />,
+  },
+  {
+    path:  '/social-hub',
+    element: <SocialHub />,
+  },
+  {
+    path:  '/my-tomenet',
+    element: <MyTomeNet />,
+  }
+]);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </StrictMode>,
 )
