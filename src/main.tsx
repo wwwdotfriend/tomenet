@@ -9,12 +9,17 @@ import Academics from './pages/Academics.tsx'
 import CampusLife from './pages/CampusLife.tsx'
 import SocialHub from './pages/SocialHub.tsx'
 import MyTomeNet from './pages/MyTomeNet.tsx'
+import AboutECU from './pages/AboutECU.tsx'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Home />,
     // errorElement: <NotFoundPage />,
+  },
+  {
+    path:  '/about-ecu',
+    element: <AboutECU />,
   },
   {
     path:  '/academics',

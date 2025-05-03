@@ -15,7 +15,7 @@ export default function SidebarMenu() {
             title: "Home", path: "/"
         },
         { 
-            title: "About ECU", path: "#"
+            title: "About ECU", path: "/about-ecu"
         },
         { 
             title: "Academics", path: "/academics",
@@ -60,7 +60,7 @@ export default function SidebarMenu() {
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
                 onClick={() => setOpen(!open)}
-                className={`group relative inline-flex h-13 w-13 items-center justify-center rounded-full cursor-pointer
+                className={`sticky group inline-flex h-13 w-13 items-center justify-center rounded-full cursor-pointer
                 transition-colors ${open 
                     ? "bg-[#782F40] hover:bg-[#000000]"
                     : "bg-[#FBF5F1] hover:bg-[#782F40] drop-shadow-[0_0_10px_rgba(0,0,0,0.6)]"} `} >
@@ -81,7 +81,7 @@ export default function SidebarMenu() {
                     {Menus.map((menu, index) => (
                         <>
                             <li key={index} 
-                                className={`py-2 text-[#CEB888] flex items-center text-center justify-center gap-x-4 hover:text-black cursor-pointer ${menu.spacing ? "mt-4" : "mt-0"} `}>
+                                className={`py-1/2 text-[#CEB888] flex items-center text-center justify-center gap-x-4 hover:text-black cursor-pointer ${menu.spacing ? "mt-7" : "mt-0"} `}>
                                 <Link to={menu.path}>
                                     <span className={`font-[Aoboshi] text-[36px] transition-colors duration-200 ${!open ? "hidden" : openSubmenuIndex === index ? "text-black" : "text [#CEB888]"}`}>
                                         {menu.title}
@@ -98,7 +98,7 @@ export default function SidebarMenu() {
                             {menu.submenu && openSubmenuIndex === index && open && (
                                 <ul>
                                     {menu.submenuItems.map((submenuItem, subIndex) => (
-                                        <li key={subIndex} className='font-[Aoboshi] text-[24px] text-[#CEB888] flex items-center text-center justify-center gap-x- hover:text-black cursor-pointer'>
+                                        <li key={subIndex} className='font-[Aoboshi] text-[24px] text-[#CEB888] flex items-center text-center justify-center gap-x-4 hover:text-black cursor-pointer'>
                                             {submenuItem.title}
                                         </li>
                                     ))}
