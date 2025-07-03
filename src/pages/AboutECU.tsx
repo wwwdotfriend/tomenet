@@ -1,17 +1,10 @@
 import Sidebar from '../components/Sidebar';
-import HeaderImage from '/AboutImage.jpg'
 
 export default function AboutECU() {
     return <div className="flex flex-col align-middle justify-center bg-[#FBF5F1] h-screen">
         <div>
         <Sidebar />
         </div>
-        
-        <header>
-            <div className='w-screen bg-center bg-cover'>
-                <img src={HeaderImage} alt='Campus Proper art'/>
-            </div>
-        </header>
 
         <div>
             <div className='text-center m-auto max-w-[750px]'>
