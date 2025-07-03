@@ -2,6 +2,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router'
+import 'rpg-awesome/css/rpg-awesome.min.css'
 
 // pages
 import Home from './pages/HomePage.tsx'

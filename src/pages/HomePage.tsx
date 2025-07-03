@@ -1,6 +1,6 @@
 // components
 import TomenetLogo from "../components/TomenetLogo";
-
+import LoginButton from "../components/LoginButton"
 
 // assets
 import BackgroundVideo from "/HomepageBackground.webm";
@@ -20,7 +20,12 @@ function Home() {
       <div className="tomenetShadow absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[120%]">
         <TomenetLogo />
       </div>
-    </div>
+
+      <div>
+        <LoginButton />
+      </div>
+
+  </div>  
   );
 }
 
