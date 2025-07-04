@@ -1,15 +1,19 @@
-// components
-import TomenetLogo from "../components/TomenetLogo";
-import LoginButton from "../components/LoginButton"
+// components //
+import Header from "../components/Header";
+import ReturningStudents from "../components/ReturningStudents";
+// import TomenetLogo from "../components/TomenetLogo";
+//import LoginButton from "../components/LoginButton";
+// import DashboardButton from "../components/DashboardButton";
 
-// assets
+// assets //
 import BackgroundVideo from "/HomepageBackground.webm";
+
 
 function Home() {
   return (
-    <div className="relative flex h-screen w-screen overflow-hidden">
+    <div className="relative h-screen w-screen">
       <video
-        className="fixed -z-1 h-screen w-screen object-cover"
+        className="fixed -z-3 h-screen w-screen object-cover"
         autoPlay
         loop
         muted
@@ -17,15 +21,27 @@ function Home() {
         <source src={BackgroundVideo} type="video/webm" />
       </video>
 
-      <div className="tomenetShadow absolute top-[45%] left-[50%] -translate-x-[50%] -translate-y-[120%]">
-        <TomenetLogo />
-      </div>
+      <Header />
 
-      <div>
-        <LoginButton />
-      </div>
+      <main>
+        <div className="flex h-screen flex-col items-center justify-center">
+          <h1>TomeNet</h1>
+          <p className="max-w-xl text-center text-white">
+            Your gateway to campus life, academic resources, and student
+            connections at Ember Coast University. Access your courses, connect
+            with classmates, and navigate campus with ease.
+          </p>
+          <div className="mt-6">
+            <ReturningStudents />
+          </div>
+        </div>
+      
+      <section className="min-h-screen bg-black/70 text-white flex items-center justify-center">
+        <h2 className="text-4xl">Next Section Here</h2>
+      </section>
 
-  </div>  
+      </main>
+    </div>
   );
 }
 

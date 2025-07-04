@@ -10,6 +10,15 @@
   src: url(assets/fonts/AoboshiOne.ttf)
 }
 
+@font-face {
+  font-family: Alegreya;
+  src: url(assets/fonts/Alegreya-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: AlegreyaItalic;
+  src: url(assets/fonts/Alegreya-Italic-VariableFont_wght.ttf);
+}
 
 /* inika-regular - latin */
 @font-face {
@@ -38,9 +47,10 @@
 }
 
 h1 {
-  font-family: Aoboshi;
-  font-size: 48px;
-  color: #782F40;
+  font-family: Alegreya;
+  font-weight: 800;
+  font-size: 64px;
+  color: #FBF5F1;
 }
 
 p {
