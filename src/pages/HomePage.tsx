@@ -17,7 +17,7 @@ function Home() {
         <source src={BackgroundVideo} type="video/webm" />
       </video>
 
-      <div className="tomenetShadow absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[120%]">
+      <div className="tomenetShadow absolute top-[45%] left-[50%] -translate-x-[50%] -translate-y-[120%]">
         <TomenetLogo />
       </div>
 
