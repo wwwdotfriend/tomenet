@@ -28,6 +28,7 @@ chrome-user-data
 *.bak2
 test.txt
 .env.local
+.github/prompts
 
 packages/react-devtools-core/dist
 packages/react-devtools-extensions/chrome/build
