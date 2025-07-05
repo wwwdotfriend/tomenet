@@ -4,6 +4,10 @@ import {
   HeartIcon,
 } from "@heroicons/react/24/outline";
 import { DocumentData, Timestamp } from "firebase/firestore";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 interface PostProps {
   data: DocumentData;
@@ -12,7 +16,7 @@ interface PostProps {
 export default function Post({ data }: PostProps) {
   return (
     <div>
-      <PostHeader 
+      <PostHeader
         username={data.username}
         name={data.name}
         timestamp={data.timestamp}
@@ -49,6 +53,11 @@ export function PostHeader({
   timestamp,
   text,
 }: PostHeaderProps) {
+  let timeString = "";
+  if (timestamp && typeof timestamp.toDate === "function") {
+    timeString = dayjs(timestamp.toDate()).fromNow();
+  }
+
   return (
     <div className="flex space-x-5 p-3">
       <img
@@ -68,7 +77,7 @@ export function PostHeader({
             @{username}
           </span>
           <span>·</span>
-          <span>{timestamp}</span>
+          <span>{timeString}</span>
         </div>
         <span>{text}</span>
       </div>
