@@ -26,6 +26,8 @@ chrome-user-data
 *.psd
 *.bak
 *.bak2
+test.txt
+.env.local
 
 packages/react-devtools-core/dist
 packages/react-devtools-extensions/chrome/build

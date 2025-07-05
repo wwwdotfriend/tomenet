@@ -1,6 +1,8 @@
 // components //
 import Header from "../components/Header";
 import ReturningStudents from "../components/ReturningStudents";
+import TomenetLogo from "../components/TomenetLogo";
+import ServiceCard from "../components/ServiceCard";
 // import TomenetLogo from "../components/TomenetLogo";
 //import LoginButton from "../components/LoginButton";
 // import DashboardButton from "../components/DashboardButton";
@@ -8,10 +10,9 @@ import ReturningStudents from "../components/ReturningStudents";
 // assets //
 import BackgroundVideo from "/HomepageBackground.webm";
 
-
 function Home() {
   return (
-    <div className="relative h-screen w-screen">
+    <div className="relative w-screen">
       <video
         className="fixed -z-3 h-screen w-screen object-cover"
         autoPlay
@@ -24,23 +25,101 @@ function Home() {
       <Header />
 
       <main>
-        <div className="flex h-screen flex-col items-center justify-center">
-          <h1>TomeNet</h1>
-          <p className="max-w-xl text-center text-white">
+        <div className="flex min-h-screen -translate-y-15 flex-col items-center justify-center">
+          <div className="tomenetShadow pb-10">
+            <TomenetLogo />
+          </div>
+          <p className="my-6 max-w-[40rem] text-center text-white text-shadow-lg/40">
             Your gateway to campus life, academic resources, and student
             connections at Ember Coast University. Access your courses, connect
             with classmates, and navigate campus with ease.
           </p>
-          <div className="mt-6">
+          <div className="mt-10 lg:mr-15">
             <ReturningStudents />
           </div>
         </div>
-      
-      <section className="min-h-screen bg-black/70 text-white flex items-center justify-center">
-        <h2 className="text-4xl">Next Section Here</h2>
-      </section>
 
+        <section className="flex min-h-100 flex-col items-center bg-black/20 px-10 py-30 text-white backdrop-blur-lg">
+          <h1 className="text-center text-4xl">Student Portals</h1>
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-6 px-20 sm:max-w-250 md:grid-cols-2 lg:max-w-300 lg:grid-cols-3">
+            <ServiceCard
+              href="#"
+              icon="public/IronCladArms.svg"
+              title="Academics"
+              description="View your course schedule, track grades, and access syllabi. Stay on top of your magical studies with academic tools and tracking."
+            />
+            <ServiceCard
+              href="#"
+              icon="public/IronCladArms.svg"
+              title="Campus Navigator"
+              description="Interactive maps of university grounds, building directories, and location-based services for navigating our expansive campus."
+            />
+            <ServiceCard
+              href="#"
+              icon="public/IronCladArms.svg"
+              title="Student Life"
+              description="Connect with fellow students, join study groups, participate in campus organizations, and connect through university-sponsored events."
+            />
+            <ServiceCard
+              href="#"
+              icon="public/IronCladArms.svg"
+              title="Quest Board"
+              description="Track your academic projects, research opportunities, and extracurricular activities. Manage deadlines and collaborate with peers."
+            />
+            <ServiceCard
+              href="/ashtag"
+              icon="public/IronCladArms.svg"
+              title="AshTag™"
+              description="Connect with classmates, study groups, and campus organizations. Stay connected and build lasting friendships with fellow scholars."
+            />
+            <ServiceCard
+              href="/"
+              icon="public/IronCladArms.svg"
+              title="My TomeNet"
+              description="Document your academic journey, track relationships with faculty and peers, and maintain records of your magical development."
+            />
+          </div>
+        </section>
+
+        <section className="flex flex-col items-center bg-[#1d1b1b] px-10 py-20 text-white backdrop-blur-lg">
+          <div className="max-w-screen">
+            <h1 className="text-center text-4xl">Ember Coast University</h1>
+            <p className="mt-7 max-w-200 text-center">
+              At Ember Coast University, academics are the foundation of every
+              student's journey. With five distinct colleges offering
+              specialized areas of study, ECU provides a comprehensive education
+              that blends magical and non-magical disciplines. Each student is
+              encouraged to explore their passions while mastering the core
+              skills needed to make a lasting impact on the world.
+            </p>
+          </div>
+          <div className="mt-10 flex flex-row gap-30">
+            <div className="flex flex-col text-center">
+              <span className="font-[Alegreya] text-[64px] font-extrabold text-red-500">
+                4,356
+              </span>
+              <span>Active Students</span>
+            </div>
+            <div className="flex flex-col text-center">
+              <span className="font-[Alegreya] text-[64px] font-extrabold text-red-500">
+                89
+              </span>
+              <span>Faculty Members</span>
+            </div>
+            <div className="flex flex-col text-center">
+              <span className="font-[Alegreya] text-[64px] font-extrabold text-red-500">
+                59
+              </span>
+              <span>Academic Programs</span>
+            </div>
+          </div>
+        </section>
       </main>
+      <footer className="flex h-20 items-center justify-center bg-[#0a0a0a] text-white backdrop-blur-lg">
+        <p className="text-sm">
+          &copy; 1496 Ember Coast University. All rights reserved.
+        </p>
+      </footer>
     </div>
   );
 }
