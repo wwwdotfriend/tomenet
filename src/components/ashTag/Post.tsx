@@ -3,11 +3,21 @@ import {
   ChatBubbleOvalLeftEllipsisIcon,
   HeartIcon,
 } from "@heroicons/react/24/outline";
+import { DocumentData, Timestamp } from "firebase/firestore";
 
-export default function Post() {
+interface PostProps {
+  data: DocumentData;
+}
+
+export default function Post({ data }: PostProps) {
   return (
     <div>
-      <PostHeader />
+      <PostHeader 
+        username={data.username}
+        name={data.name}
+        timestamp={data.timestamp}
+        text={data.text}
+      />
 
       <div className="ml-16 flex space-x-18 p-3">
         <div className="relative">
@@ -26,7 +36,19 @@ export default function Post() {
   );
 }
 
-export function PostHeader() {
+interface PostHeaderProps {
+  username: string;
+  name: string;
+  timestamp: Timestamp;
+  text: string;
+}
+
+export function PostHeader({
+  username,
+  name,
+  timestamp,
+  text,
+}: PostHeaderProps) {
   return (
     <div className="flex space-x-5 p-3">
       <img
@@ -40,15 +62,15 @@ export function PostHeader() {
       <div className="flex flex-col space-y-1.5 text-[16px]">
         <div className="flex space-x-1.5 text-[#B3ACA9]">
           <span className="inline-block max-w-[60px] overflow-hidden font-semibold text-ellipsis whitespace-nowrap text-[#D7D1CD] min-[400px]:max-w-[100px] min-[500px]:max-w-[140px]">
-            Stefan Sindervitch
+            {name}
           </span>
           <span className="inline-block max-w-[60px] overflow-hidden text-ellipsis whitespace-nowrap min-[400px]:max-w-[100px] min-[500px]:max-w-[140px] sm:max-w-[160px]">
-            @StefanSpooner423
+            @{username}
           </span>
           <span>·</span>
-          <span>a day ago</span>
+          <span>{timestamp}</span>
         </div>
-        <span>Please join the Spooner Club!!!!!</span>
+        <span>{text}</span>
       </div>
     </div>
   );

@@ -2,7 +2,6 @@ import AshTagSidebar from "../components/ashTag/AshTagSidebar";
 import PostFeed from "../components/ashTag/PostFeed";
 import Widgets from "../components/ashTag/Widgets";
 import LoginPrompt from "../components/LoginPrompt";
-import LoginModal from "../components/modals/LoginModal";
 
 export default function AshTag() {
   return (
@@ -13,7 +12,6 @@ export default function AshTag() {
         <Widgets />
       </div>
       <LoginPrompt />
-      {/* <LoginModal /> */}
     </>
   );
 }

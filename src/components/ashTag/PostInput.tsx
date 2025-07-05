@@ -1,3 +1,5 @@
+"use client";
+
 import {
   CalendarIcon,
   ChartBarIcon,
@@ -5,8 +7,29 @@ import {
   MapPinIcon,
   PhotoIcon,
 } from "@heroicons/react/24/outline";
+import { useState } from "react";
+import { db } from "../../../firebase";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 export default function PostInput() {
+  const [text, setText] = useState("");
+  const user = useSelector((state: RootState) => state.user);
+
+  async function sendPost() {
+    await addDoc(collection(db, "posts"), {
+      text: text,
+      name: user.name,
+      username: user.username,
+      timestamp: serverTimestamp(),
+      likes: [],
+      comments: [],
+    });
+
+    setText('')
+  }
+
   return (
     <div className="flex space-x-5 p-3">
       <img
@@ -21,6 +44,8 @@ export default function PostInput() {
         <textarea
           className="min-h-[50px] resize-none outline-none"
           placeholder="What's happening?"
+          onChange={(event) => setText(event.target.value)}
+          value={text}
         />
 
         <div className="flex justify-between pt-5">
@@ -33,7 +58,9 @@ export default function PostInput() {
           </div>
 
           <button
-            className="bg-amber-700 text-white w-[80px] h-[36px] rounded-full text-sm cursor-pointer"
+            className="h-[36px] w-[80px] cursor-pointer rounded-full bg-amber-700 text-sm text-white disabled:border-2 disabled:border-amber-700/50 disabled:bg-amber-700/10"
+            disabled={!text}
+            onClick={() => sendPost()}
           >
             Fire!
           </button>

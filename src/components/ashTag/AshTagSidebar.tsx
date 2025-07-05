@@ -10,10 +10,20 @@ import {
   EllipsisHorizontalCircleIcon,
 } from "@heroicons/react/24/outline";
 import Logo from "../Logo";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../firebase";
+import { useDispatch } from "react-redux";
+import SidebarUserInfo from "./SidebarUserInfo";
 
 export default function AshTagSidebar() {
+  const dispatch = useDispatch();
+
+  async function handleSignOut() {
+    signOut(auth);
+  }
+
   return (
-    <nav className="sticky top-0 hidden h-screen flex-col p-3 sm:flex xl:ml-20 xl:mr-10">
+    <nav className="sticky top-0 hidden h-screen flex-col p-3 sm:flex xl:mr-10 xl:ml-20">
       <div className="relative h-full">
         <div className="py-5">
           <Logo />
@@ -31,7 +41,8 @@ export default function AshTagSidebar() {
             Fire!
           </button>
         </ul>
-        <div className="absolute bottom-0">User Info</div>
+
+        <SidebarUserInfo />
       </div>
     </nav>
   );
