@@ -29,7 +29,7 @@ export default function AshTagSidebar() {
           <Logo />
         </div>
         <ul>
-          <SidebarLink Icon={HomeIcon} text="Home" />
+          <SidebarLink Icon={HomeIcon} text="Home"/>
           <SidebarLink Icon={HashtagIcon} text="Explore" />
           <SidebarLink Icon={BellIcon} text="Notifications" />
           <SidebarLink Icon={InboxIcon} text="Messages" />
@@ -60,7 +60,7 @@ interface SidebarLinkProps {
 
 function SidebarLink({ text, Icon }: SidebarLinkProps) {
   return (
-    <li className="p2.5 mb-4 flex items-center space-x-3 text-xl">
+    <li className="p2.5 mb-4 flex items-center space-x-3 text-xl cursor-not-allowed">
       <Icon className="h-7" />
       <span className="hidden xl:block">{text}</span>
     </li>

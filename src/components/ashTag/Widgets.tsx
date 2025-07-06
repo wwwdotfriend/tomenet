@@ -2,7 +2,7 @@ import {
   EllipsisHorizontalIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
-import React from "react";
+
 
 export default function Widgets() {
   return (
@@ -17,7 +17,7 @@ export default function Widgets() {
       </div>
 
       <div className="rounded-xl bg-[#292827] p-3">
-        <span className="mb-2 font-[Aoboshi] text-xl font-bold">
+        <span className="mb-2 font-[Aoboshi] text-xl">
           What's Happening?
         </span>
 

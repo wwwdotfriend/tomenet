@@ -1,7 +1,9 @@
 import AshTagSidebar from "../components/ashTag/AshTagSidebar";
+import CommentModal from "../components/modals/CommentModal";
 import PostFeed from "../components/ashTag/PostFeed";
 import Widgets from "../components/ashTag/Widgets";
 import LoginPrompt from "../components/LoginPrompt";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function AshTag() {
   return (
@@ -11,7 +13,10 @@ export default function AshTag() {
         <PostFeed />
         <Widgets />
       </div>
+
+      <CommentModal />
       <LoginPrompt />
+      <LoadingScreen />
     </>
   );
 }

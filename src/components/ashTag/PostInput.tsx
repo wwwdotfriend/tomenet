@@ -9,15 +9,39 @@ import {
 } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { db } from "../../../firebase";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import {
+  addDoc,
+  arrayUnion,
+  collection,
+  doc,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
+import {
+  closeCommentModal,
+  openLoginModal,
+} from "../../../redux/slices/modalSlice";
 
-export default function PostInput() {
+interface PostInputProps {
+  insideModal?: boolean;
+}
+
+export default function PostInput({ insideModal }: PostInputProps) {
   const [text, setText] = useState("");
   const user = useSelector((state: RootState) => state.user);
+  const commentDetails = useSelector(
+    (state: RootState) => state.modals.commentPostDetails,
+  );
+  const dispatch = useDispatch();
 
   async function sendPost() {
+    if (!user.username) {
+      dispatch(openLoginModal());
+      return;
+    }
+
     await addDoc(collection(db, "posts"), {
       text: text,
       name: user.name,
@@ -27,23 +51,38 @@ export default function PostInput() {
       comments: [],
     });
 
-    setText('')
+    setText("");
+  }
+
+  async function sendComment() {
+    const postRef = doc(db, "posts", commentDetails.id);
+
+    await updateDoc(postRef, {
+      comments: arrayUnion({
+        name: user.name,
+        username: user.username,
+        text: text,
+      }),
+    });
+
+    setText("");
+    dispatch(closeCommentModal());
   }
 
   return (
     <div className="flex space-x-5 p-3">
       <img
-        className="h-11 w-11"
-        src="Frey.png"
+        className="z-10 h-11 w-11"
+        src={insideModal ? "/assets/User.png" : "/assets/Frey.png"}
         width={44}
         height={44}
-        alt="Avatar"
+        alt={insideModal ? "Profile Picture" : "Logo"}
       />
 
       <div className="w-full text-white">
         <textarea
-          className="min-h-[50px] resize-none outline-none"
-          placeholder="What's happening?"
+          className="min-h-[50px] w-full resize-none outline-none"
+          placeholder={insideModal ? "Send your reply" : "What's happening?"}
           onChange={(event) => setText(event.target.value)}
           value={text}
         />
@@ -60,7 +99,7 @@ export default function PostInput() {
           <button
             className="h-[36px] w-[80px] cursor-pointer rounded-full bg-amber-700 text-sm text-white disabled:border-2 disabled:border-amber-700/50 disabled:bg-amber-700/10"
             disabled={!text}
-            onClick={() => sendPost()}
+            onClick={() => (insideModal ? sendComment() : sendPost())}
           >
             Fire!
           </button>
