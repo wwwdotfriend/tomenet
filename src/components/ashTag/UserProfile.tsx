@@ -7,11 +7,158 @@ import Widgets from "./Widgets";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
+import { getAuth, updateProfile } from "firebase/auth";
+import { useState, useEffect } from "react";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  limit,
+  writeBatch,
+} from "firebase/firestore";
+import { db } from "../../../firebase";
+
+interface ProfileData {
+  name: string;
+  username: string;
+  photoURL?: string;
+}
 
 export default function UserProfile() {
-  const name = useSelector((state: RootState) => state.user.name);
-  const username = useSelector((state: RootState) => state.user.username);
-  console.log(username, ",", name);
+  const { username: profileUsername } = useParams<{ username: string }>();
+  const currentUser = useSelector((state: RootState) => state.user);
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  const [profileData, setProfileData] = useState<ProfileData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Check if this is the current user's own profile
+  const isOwnProfile = currentUser.username === profileUsername;
+
+  useEffect(() => {
+    async function fetchProfileData() {
+      if (!profileUsername) {
+        setError("Username not found");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        setLoading(true);
+
+        // Query posts to get user details
+        const postsQuery = query(
+          collection(db, "posts"),
+          where("username", "==", profileUsername),
+          limit(1),
+        );
+
+        const querySnapshot = await getDocs(postsQuery);
+
+        if (!querySnapshot.empty) {
+          const firstPost = querySnapshot.docs[0].data();
+          setProfileData({
+            name: firstPost.name,
+            username: firstPost.username,
+            photoURL: firstPost.photoURL,
+          });
+        } else {
+          setError("User not found");
+        }
+      } catch (err) {
+        console.error("Error fetching profile data:", err);
+        setError("Failed to load profile");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProfileData();
+  }, [profileUsername]);
+
+  const handleProfilePictureClick = async () => {
+    if (user && isOwnProfile) {
+      try {
+        const newPhotoURL = prompt(
+          "Enter the URL for your new profile picture:",
+        );
+
+        if (!newPhotoURL || newPhotoURL.trim() === "") {
+          console.log("Profile picture update cancelled");
+          return;
+        }
+
+        try {
+          new URL(newPhotoURL);
+        } catch (e) {
+          alert("Please enter a valid URL");
+          return;
+        }
+
+        await updateProfile(user, {
+          photoURL: newPhotoURL,
+        });
+
+        const postsQuery = query(
+          collection(db, "posts"),
+          where("username", "==", currentUser.username),
+        );
+
+        const querySnapshot = await getDocs(postsQuery);
+
+        if (!querySnapshot.empty) {
+          const batch = writeBatch(db);
+
+          querySnapshot.docs.forEach((docRef) => {
+            batch.update(docRef.ref, {
+              photoURL: newPhotoURL,
+            });
+          });
+
+          await batch.commit();
+
+          setProfileData((prev) =>
+            prev ? { ...prev, photoURL: newPhotoURL } : null,
+          );
+        }
+
+        console.log("Profile picture updated successfully!");
+      } catch (error) {
+        console.error("Error updating profile picture:", error);
+      }
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="mx-auto flex min-h-screen max-w-[1400px] justify-center text-white">
+        <AshTagSidebar />
+        <div className="max-w-2xl flex-grow border-x border-[#696765]">
+          <div className="flex items-center justify-center p-8">
+            <span>Loading profile...</span>
+          </div>
+        </div>
+        <Widgets />
+      </div>
+    );
+  }
+
+  if (error || !profileData) {
+    return (
+      <div className="mx-auto flex min-h-screen max-w-[1400px] justify-center text-white">
+        <AshTagSidebar />
+        <div className="max-w-2xl flex-grow border-x border-[#696765]">
+          <div className="flex items-center justify-center p-8">
+            <span className="text-red-400">{error || "Profile not found"}</span>
+          </div>
+        </div>
+        <Widgets />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -23,8 +170,8 @@ export default function UserProfile() {
               <ArrowLeftIcon className="mr-5 flex h-5 w-5 cursor-pointer transition hover:text-amber-600" />
             </Link>
             <div className="flex flex-col">
-              <span className="text-lg">{name}</span>
-              <span className="text-gray-400">{username}</span>
+              <span className="text-lg">{profileData.name}</span>
+              <span className="text-gray-400">@{profileData.username}</span>
             </div>
           </div>
           <div className="relative">
@@ -35,16 +182,22 @@ export default function UserProfile() {
                 className="h-full w-full object-cover object-center"
               />
             </div>
-            <div className="absolute bottom-0 left-4 translate-y-1/2">
+            <div
+              className={`absolute bottom-0 left-4 translate-y-1/2 ${
+                isOwnProfile ? "cursor-pointer" : "cursor-default"
+              }`}
+              onClick={handleProfilePictureClick}
+            >
               <img
-                src="https://i.imgur.com/RKBrYW9.png"
+                src={profileData.photoURL || "/assets/User.png"}
                 className="h-35 w-35 rounded-full border-4 border-[#0a0a0a] object-cover object-center"
+                alt="Profile Picture"
               />
             </div>
           </div>
           <div className="flex flex-col pt-20 pl-6">
-            <span className="text-lg">{name}</span>
-            <span className="text-gray-400">@{username}</span>
+            <span className="text-lg">{profileData.name}</span>
+            <span className="text-gray-400">@{profileData.username}</span>
           </div>
           <div className="px-6 pt-4">
             <span>

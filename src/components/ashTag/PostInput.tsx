@@ -23,6 +23,7 @@ import {
   closeCommentModal,
   openLoginModal,
 } from "../../../redux/slices/modalSlice";
+import { getAuth } from "firebase/auth";
 
 interface PostInputProps {
   insideModal?: boolean;
@@ -35,6 +36,14 @@ export default function PostInput({ insideModal }: PostInputProps) {
     (state: RootState) => state.modals.commentPostDetails,
   );
   const dispatch = useDispatch();
+  const auth = getAuth();
+  const currentUser = auth.currentUser;
+  let photoURL = "";
+
+  if (currentUser) {
+    photoURL = currentUser.photoURL || "";
+  } else {
+  }
 
   async function sendPost() {
     if (!user.username) {
@@ -70,13 +79,13 @@ export default function PostInput({ insideModal }: PostInputProps) {
   }
 
   return (
-    <div className="flex space-x-5 p-3">
+    <div className="flex space-x-5 border-b border-[#696765] px-3 pt-5 pb-4">
       <img
-        className="z-10 h-11 w-11"
-        src={insideModal ? "/assets/User.png" : "/assets/Frey.png"}
+        className="z-10 h-11 w-11 rounded-full object-cover"
+        src={photoURL}
         width={44}
         height={44}
-        alt={insideModal ? "Profile Picture" : "Logo"}
+        alt="Profile Picture"
       />
 
       <div className="w-full text-white">
@@ -87,13 +96,13 @@ export default function PostInput({ insideModal }: PostInputProps) {
           value={text}
         />
 
-        <div className="flex justify-between pt-5">
+        <div className="flex items-center justify-between pt-5">
           <div className="flex space-x-1.5">
-            <PhotoIcon className="h-[22px] w-[22px] text-amber-700" />
-            <ChartBarIcon className="h-[22px] w-[22px] text-amber-700" />
-            <FaceSmileIcon className="h-[22px] w-[22px] text-amber-700" />
-            <CalendarIcon className="h-[22px] w-[22px] text-amber-700" />
-            <MapPinIcon className="h-[22px] w-[22px] text-amber-700" />
+            <PhotoIcon className="h-[22px] w-[22px] text-amber-700 cursor-not-allowed" />
+            <ChartBarIcon className="h-[22px] w-[22px] text-amber-700 cursor-not-allowed" />
+            <FaceSmileIcon className="h-[22px] w-[22px] text-amber-700 cursor-not-allowed" />
+            <CalendarIcon className="h-[22px] w-[22px] text-amber-700 cursor-not-allowed" />
+            <MapPinIcon className="h-[22px] w-[22px] text-amber-700 cursor-not-allowed" />
           </div>
 
           <button

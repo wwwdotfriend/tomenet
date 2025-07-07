@@ -11,6 +11,7 @@ import { EyeIcon, EyeSlashIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase";
+import { signInUser } from "../../../redux/slices/userSlice";
 
 export default function LoginModal() {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,11 +22,41 @@ export default function LoginModal() {
   const dispatch: AppDispatch = useDispatch();
 
   async function handleLogIn() {
-    await signInWithEmailAndPassword(auth, email, password);
+    const userCredentials = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    );
+    const currentUser = userCredentials.user;
+
+    dispatch(
+      signInUser({
+        name: currentUser.displayName,
+        username: currentUser.email!.split("@")[0],
+        email: currentUser.email,
+        uid: currentUser.uid,
+        photoURL: currentUser.photoURL || "",
+      }),
+    );
   }
 
   async function handleGuestLogIn() {
-    await signInWithEmailAndPassword(auth, "guest1496@gmail.com", "12345678");
+    const userCredentials = await signInWithEmailAndPassword(
+      auth,
+      "guest1496@gmail.com",
+      "12345678",
+    );
+    const currentUser = userCredentials.user;
+
+    dispatch(
+      signInUser({
+        name: currentUser.displayName,
+        username: currentUser.email!.split("@")[0],
+        email: currentUser.email,
+        uid: currentUser.uid,
+        photoURL: currentUser.photoURL || "",
+      }),
+    );
   }
 
   return (

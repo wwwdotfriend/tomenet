@@ -61,7 +61,6 @@ export default function SignUpModal() {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser) return;
 
-      // Handle Redux Actions
       dispatch(
         signInUser({
           name: currentUser.displayName,

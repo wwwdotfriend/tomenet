@@ -72,11 +72,15 @@ export default function PostDetail() {
               <div className="mb-5 flex items-center justify-between">
                 <div className="flex space-x-3">
                   <img
-                    src={post?.profilePicUrl || "/assets/User.png"}
+                    src={post?.photoURL || "/assets/User.png"}
                     width={44}
                     height={44}
                     alt="Profile Picture"
-                    className="h-11 w-11 rounded-full"
+                    className="h-11 w-11 rounded-full object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/assets/User.png";
+                    }}
                   />
                   <div className="flex flex-col text-[15px]">
                     <span className="font-bold">{post?.name || "Unknown"}</span>
@@ -93,7 +97,7 @@ export default function PostDetail() {
               </span>
 
               <div className="border-b border-[#696765] p-3 text-[15px]">
-                <span className="font-bold">{post?.likes.length}</span> Likes
+                <span className="font-bold">{post?.likes?.length || 0}</span> Likes
               </div>
 
               <div className="flex h-11 items-center justify-evenly border-b border-[#696765] px-3 pb-5 text-[15px]">
@@ -105,7 +109,7 @@ export default function PostDetail() {
             </div>
           )}
           <div>
-            {post?.comments.map((comment: Comment, idx: number) => (
+            {post?.comments?.map((comment: Comment, idx: number) => (
               <Comment key={idx} comment={comment} />
             ))}
           </div>

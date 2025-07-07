@@ -1,7 +1,6 @@
 "use client";
 
 import { signOut } from "firebase/auth";
-import { auth } from "../../../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutUser } from "../../../redux/slices/userSlice";
 import { AppDispatch, RootState } from "../../../redux/store";
@@ -9,10 +8,20 @@ import {
   closeLoginModal,
   closeSignUpModal,
 } from "../../../redux/slices/modalSlice";
+import { getAuth } from "firebase/auth";
 
 export default function SidebarUserInfo() {
   const dispatch: AppDispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
+
+  const auth = getAuth();
+  const currentUser = auth.currentUser;
+  let photoURL = "";
+
+  if (currentUser) {
+    photoURL = currentUser.photoURL || "";
+  } else {
+  }
 
   async function handleSignOut() {
     await signOut(auth);
@@ -29,11 +38,11 @@ export default function SidebarUserInfo() {
       onClick={() => handleSignOut()}
     >
       <img
-        src={"/assets/User.png"}
+        src={photoURL}
         width={36}
         height={36}
         alt="Profile Picture"
-        className="h-9 w-9"
+        className="h-9 w-9 rounded-full object-cover object-center"
       />
 
       <div className="hidden max-w-40 flex-col text-sm xl:flex">

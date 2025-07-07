@@ -61,6 +61,7 @@ export default function Post({ data, id }: PostProps) {
           name={data.name}
           timestamp={data.timestamp}
           text={data.text}
+          photoURL={data.photoURL}
         />
       </Link>
 
@@ -110,7 +111,7 @@ export default function Post({ data, id }: PostProps) {
           )}
         </div>
         <div className="relative">
-          <ArrowUpTrayIcon className="h-[22px] w-[22px] cursor-pointer transition hover:text-amber-600" />
+          <ArrowUpTrayIcon className="h-[22px] w-[22px] cursor-not-allowed text-gray-400" />
         </div>
       </div>
     </div>
@@ -123,6 +124,7 @@ interface PostHeaderProps {
   timestamp?: Timestamp;
   text: string;
   replyTo?: string;
+  photoURL?: string;
 }
 
 export function PostHeader({
@@ -131,6 +133,7 @@ export function PostHeader({
   timestamp,
   text,
   replyTo,
+  photoURL,
 }: PostHeaderProps) {
   let timeString = "";
   if (timestamp && typeof timestamp.toDate === "function") {
@@ -140,11 +143,15 @@ export function PostHeader({
   return (
     <div className="flex space-x-5 p-3">
       <img
-        src="assets/User.png"
+        src={photoURL || "assets/User.png"}
         width={44}
         height={44}
         alt="Profile Picture"
-        className="z-10 h-11 w-11"
+        className="z-10 h-11 w-11 rounded-full object-cover"
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.src = "assets/User.png";
+        }}
       />
 
       <div className="flex flex-col space-y-1.5 text-[16px]">
