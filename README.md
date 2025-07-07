@@ -46,7 +46,7 @@ Built as both an immersive campaign tool and a learning project for modern web d
 
 ### Prerequisites
 
-- Node.js (version 16 or higher)
+- Node.js
 - npm or yarn package manager
 
 ### Installation
