@@ -4,7 +4,10 @@ import CommentModal from "../modals/CommentModal";
 import AshTagSidebar from "./AshTagSidebar";
 import PostFeed from "./PostFeed";
 import Widgets from "./Widgets";
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowLeftIcon,
+  EllipsisHorizontalCircleIcon,
+} from "@heroicons/react/24/outline";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { getAuth, updateProfile } from "firebase/auth";
@@ -23,6 +26,7 @@ interface ProfileData {
   name: string;
   username: string;
   photoURL?: string;
+  bio?: string;
 }
 
 export default function UserProfile() {
@@ -49,7 +53,6 @@ export default function UserProfile() {
       try {
         setLoading(true);
 
-        // Query posts to get user details
         const postsQuery = query(
           collection(db, "posts"),
           where("username", "==", profileUsername),
@@ -64,6 +67,7 @@ export default function UserProfile() {
             name: firstPost.name,
             username: firstPost.username,
             photoURL: firstPost.photoURL,
+            bio: firstPost.bio,
           });
         } else {
           setError("User not found");
@@ -78,6 +82,46 @@ export default function UserProfile() {
 
     fetchProfileData();
   }, [profileUsername]);
+
+  const handleBioClick = async () => {
+    if (user && isOwnProfile) {
+      try {
+        const newBio = prompt("Enter your new bio:");
+
+        if (!newBio || newBio.trim() === "") {
+          console.log("Bio update cancelled");
+          return;
+        }
+
+        // Find all posts by this user
+        const postsQuery = query(
+          collection(db, "posts"),
+          where("username", "==", currentUser.username),
+        );
+
+        const querySnapshot = await getDocs(postsQuery);
+
+        if (!querySnapshot.empty) {
+          const batch = writeBatch(db);
+
+          querySnapshot.docs.forEach((docRef) => {
+            batch.update(docRef.ref, {
+              bio: newBio,
+            });
+          });
+
+          await batch.commit();
+
+          console.log("Bio updated in posts!");
+        }
+
+        // Update local state
+        setProfileData((prev) => (prev ? { ...prev, bio: newBio } : null));
+      } catch (error) {
+        console.error("Error updating bio:", error);
+      }
+    }
+  };
 
   const handleProfilePictureClick = async () => {
     if (user && isOwnProfile) {
@@ -195,17 +239,20 @@ export default function UserProfile() {
               />
             </div>
           </div>
-          <div className="flex flex-col pt-20 pl-6">
-            <span className="text-lg">{profileData.name}</span>
-            <span className="text-gray-400">@{profileData.username}</span>
+          <div className="flex justify-between px-3 pt-20">
+            <div className="flex flex-col">
+              <span className="text-lg">{profileData.name}</span>
+              <span className="text-gray-400">@{profileData.username}</span>
+            </div>
+            {isOwnProfile && (
+              <EllipsisHorizontalCircleIcon
+                className="h-8 w-8 cursor-pointer transition hover:text-amber-600"
+                onClick={handleBioClick}
+              />
+            )}
           </div>
-          <div className="px-6 pt-4">
-            <span>
-              Hello I Am Hello I Am Hello I Am Hello I Am Hello I Am Hello I Am
-              Hello I Am Hello I Am Hello I Am Hello I Am Hello I Am Hello I Am
-              Hello I Am Hello I Am Hello I Am Hello I Am Hello I Am Hello I Am
-              Hello I Am Hello I Am
-            </span>
+          <div className="px-3 pt-5">
+            <span>{profileData.bio}</span>
           </div>
           <PostFeed />
         </div>

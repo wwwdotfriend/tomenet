@@ -58,7 +58,7 @@ export default function PostDetail() {
         <div className="max-w-2xl flex-grow border-x border-[#696765]">
           <div className="sticky top-0 z-50 flex items-center border-b border-[#696765] bg-[#0a0a0a] px-3 py-4 font-[Aoboshi] text-lg backdrop-blur-sm sm:text-xl">
             <Link to="/ashtag">
-              <ArrowLeftIcon className="mr-5 flex h-5 w-5 cursor-pointer hover:text-amber-600 transition" />
+              <ArrowLeftIcon className="mr-5 flex h-5 w-5 cursor-pointer transition hover:text-amber-600" />
             </Link>
             AshTag
           </div>
@@ -97,7 +97,8 @@ export default function PostDetail() {
               </span>
 
               <div className="border-b border-[#696765] p-3 text-[15px]">
-                <span className="font-bold">{post?.likes?.length || 0}</span> Likes
+                <span className="font-bold">{post?.likes?.length || 0}</span>{" "}
+                Likes
               </div>
 
               <div className="flex h-11 items-center justify-evenly border-b border-[#696765] px-3 pb-5 text-[15px]">
