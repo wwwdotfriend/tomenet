@@ -149,9 +149,11 @@ export function PostHeader({
 
       <div className="flex flex-col space-y-1.5 text-[16px]">
         <div className="flex space-x-1.5 text-[#B3ACA9]">
-          <span className="inline-block max-w-[60px] overflow-hidden font-semibold text-ellipsis whitespace-nowrap text-[#D7D1CD] min-[400px]:max-w-[100px] min-[500px]:max-w-[200px]">
-            {name}
-          </span>
+          <Link to={`/ashtag/user/${username}`}>
+            <span className="inline-block max-w-[60px] overflow-hidden font-semibold text-ellipsis whitespace-nowrap text-[#D7D1CD] min-[400px]:max-w-[100px] min-[500px]:max-w-[200px]">
+              {name}
+            </span>
+          </Link>
           <span className="inline-block max-w-[60px] overflow-hidden text-ellipsis whitespace-nowrap min-[400px]:max-w-[100px] min-[500px]:max-w-[140px] sm:max-w-[160px]">
             @{username}
           </span>

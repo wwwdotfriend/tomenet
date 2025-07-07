@@ -30,7 +30,7 @@ export default function PostDetail() {
           setLoading(false);
           return;
         }
-        const docRef = doc(db, "posts", postid); // change "posts" to your actual collection name
+        const docRef = doc(db, "posts", postid);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {

@@ -9,6 +9,7 @@ import StoreProvider from "../redux/StoreProvider";
 import Home from "./pages/HomePage.tsx";
 import AshTag from "./pages/AshTag.tsx";
 import PostDetail from "./components/ashTag/PostDetail.tsx";
+import UserProfile from "./components/ashTag/UserProfile.tsx";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
     path: "/ashtag/post/:postid",
     element: <PostDetail />,
   },
+  {
+    path: "/ashtag/user/:username",
+    element: <UserProfile />,
+  }
 ]);
 
 createRoot(document.getElementById("root")!).render(

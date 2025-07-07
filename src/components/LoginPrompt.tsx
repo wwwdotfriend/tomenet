@@ -7,7 +7,6 @@ import { RootState } from "../../redux/store";
 
 export default function LoginPrompt() {
   const name = useSelector((state: RootState) => state.user.name);
-  console.log(name);
 
   return (
     !name && (

@@ -1,15 +1,10 @@
 // components //
 import Header from "../components/Header";
-import ReturningStudents from "../components/ReturningStudents";
-import TomenetLogo from "../components/TomenetLogo";
 import ServiceCard from "../components/ServiceCard";
-// import TomenetLogo from "../components/TomenetLogo";
-//import LoginButton from "../components/LoginButton";
-// import DashboardButton from "../components/DashboardButton";
+import tomenetLogo from "/TomenetLogo.svg"
 
 // assets //
 import BackgroundVideo from "/HomepageBackground.webm";
-import { Link } from "react-router";
 
 function Home() {
   return (
@@ -28,61 +23,61 @@ function Home() {
       <main>
         <div className="flex min-h-screen -translate-y-15 flex-col items-center justify-center">
           <div className="tomenetShadow pb-10">
-            <TomenetLogo />
+            <img src={tomenetLogo} alt="TomeNet Logo" />
           </div>
           <p className="my-6 max-w-[40rem] text-center text-white text-shadow-lg/40">
             Your gateway to campus life, academic resources, and student
             connections at Ember Coast University. Access your courses, connect
             with classmates, and navigate campus with ease.
           </p>
-          <div className="mt-10 lg:mr-15">
-            <Link to="/ashtag">
+          <div className="mt-10 lg:mr-15 max-w-[400px]">
+            <a href="#student-portals">
             <button className="group relative inline-flex h-16 items-center justify-center overflow-hidden rounded-md bg-[#FBF5F1] px-6 font-[College] text-[28px] text-[#782F40] duration-300 [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] active:translate-y-1 active:scale-x-110 active:scale-y-90">
               <span className="absolute h-0 w-0 rounded-full bg-[#782F40] transition-all duration-300 group-hover:h-64 group-hover:w-72"></span>
               <span className="relative group-hover:text-[#FBF5F1]">
-                AshTag
+                Explore
               </span>
             </button>
-            </Link>
+            </a>
           </div>
         </div>
 
         <section className="flex min-h-100 flex-col items-center bg-black/20 px-10 py-30 text-white backdrop-blur-lg">
-          <h1 className="text-center text-4xl">Student Portals</h1>
+          <h1 id="student-portals" className="text-center text-4xl">Student Portals</h1>
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-6 px-20 sm:max-w-250 md:grid-cols-2 lg:max-w-300 lg:grid-cols-3">
             <ServiceCard
-              href="#"
-              icon="public/IronCladArms.svg"
+              href="#student-portals"
+              icon="/IronCladArms.svg"
               title="Academics"
               description="View your course schedule, track grades, and access syllabi. Stay on top of your magical studies with academic tools and tracking."
             />
             <ServiceCard
-              href="#"
-              icon="public/IronCladArms.svg"
+              href="#student-portals"
+              icon="/IronCladArms.svg"
               title="Campus Navigator"
               description="Interactive maps of university grounds, building directories, and location-based services for navigating our expansive campus."
             />
             <ServiceCard
-              href="#"
-              icon="public/IronCladArms.svg"
+              href="#student-portals"
+              icon="/IronCladArms.svg"
               title="Student Life"
               description="Connect with fellow students, join study groups, participate in campus organizations, and connect through university-sponsored events."
             />
             <ServiceCard
-              href="#"
-              icon="public/IronCladArms.svg"
+              href="#student-portals"
+              icon="/IronCladArms.svg"
               title="Quest Board"
               description="Track your academic projects, research opportunities, and extracurricular activities. Manage deadlines and collaborate with peers."
             />
             <ServiceCard
               href="/ashtag"
-              icon="public/IronCladArms.svg"
+              icon="/IronCladArms.svg"
               title="AshTag™"
               description="Connect with classmates, study groups, and campus organizations. Stay connected and build lasting friendships with fellow scholars."
             />
             <ServiceCard
-              href="/"
-              icon="public/IronCladArms.svg"
+              href="#student-portals"
+              icon="/IronCladArms.svg"
               title="My TomeNet"
               description="Document your academic journey, track relationships with faculty and peers, and maintain records of your magical development."
             />
