@@ -20,7 +20,7 @@ Built as both an immersive campaign tool and a learning project for modern web d
 ## Features (ALL W.I.P)
 **Social & Communication**
 - AshTag social feed (inspired by Twitter) for in-universe interactions
-- Party messaging system with private and group chats 
+- Party messaging system with private and group chats
 - Campus bulletin board with announcements
 - Relationship tracking with NPCs and fellow students
 
@@ -53,7 +53,7 @@ Built as both an immersive campaign tool and a learning project for modern web d
 
 1. Clone the repository
 ```bash
-git clone https://github.com/wwwdotfriend/tomenet.git
+git clone https://github.com/yourusername/tomenet.git
 cd tomenet
 ```
 
