@@ -51,7 +51,7 @@ Built as both an immersive campaign tool and a learning project for webdev, Tome
 ### Installation
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/tomenet.git
+git clone https://github.com/wwwdotfriend/tomenet
 cd tomenet
 ```
 
