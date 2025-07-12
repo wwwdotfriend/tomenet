@@ -55,7 +55,7 @@ export default function Post({ data, id }: PostProps) {
 
   return (
     <div>
-      <Link to={"./post/" + id}>
+      <Link to={`/ashtag/post/${id}`}>
         <PostHeader
           username={data.username}
           name={data.name}
@@ -124,7 +124,7 @@ interface PostHeaderProps {
   timestamp?: Timestamp;
   text: string;
   replyTo?: string;
-  photoURL?: string;
+  photoURL: string;
 }
 
 export function PostHeader({
@@ -143,21 +143,17 @@ export function PostHeader({
   return (
     <div className="flex space-x-5 p-3">
       <img
-        src={photoURL || "assets/User.png"}
+        src={photoURL || "https://i.imgur.com/zKbL9ih.png"}
         width={44}
         height={44}
         alt="Profile Picture"
         className="z-10 h-11 w-11 rounded-full object-cover"
-        onError={(e) => {
-          const target = e.target as HTMLImageElement;
-          target.src = "assets/User.png";
-        }}
       />
 
       <div className="flex flex-col space-y-1.5 text-[16px]">
         <div className="flex space-x-1.5 text-[#B3ACA9]">
           <Link to={`/ashtag/user/${username}`}>
-            <span className="inline-block max-w-[60px] overflow-hidden font-semibold text-ellipsis whitespace-nowrap text-[#D7D1CD] min-[400px]:max-w-[100px] min-[500px]:max-w-[200px]">
+            <span className="inline-block max-w-[60px] overflow-hidden font-semibold text-ellipsis whitespace-nowrap text-[#D7D1CD] min-[400px]:max-w-[100px] min-[500px]:max-w-[200px] hover:underline">
               {name}
             </span>
           </Link>

@@ -16,10 +16,10 @@ export default function SidebarUserInfo() {
 
   const auth = getAuth();
   const currentUser = auth.currentUser;
-  let photoURL = "";
+  let photoURL = user.photoURL;
 
   if (currentUser) {
-    photoURL = currentUser.photoURL || "";
+    photoURL = currentUser.photoURL || "https://i.imgur.com/zKbL9ih.png";
   } else {
   }
 

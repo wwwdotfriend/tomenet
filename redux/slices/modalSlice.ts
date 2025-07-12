@@ -9,6 +9,7 @@ const initialState = {
     username: "",
     id: "",
     text: "",
+    photoURL: "",
   }
 };
 
@@ -39,6 +40,7 @@ const modalSlice = createSlice({
       state.commentPostDetails.username = action.payload.username
       state.commentPostDetails.id = action.payload.id
       state.commentPostDetails.text = action.payload.text
+      state.commentPostDetails.photoURL = action.payload.photoURL
     }
   },
 });

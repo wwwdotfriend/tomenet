@@ -30,6 +30,7 @@ export default function CommentModal() {
             name={commentDetails.name}
             username={commentDetails.username}
             text={commentDetails.text}
+            photoURL={commentDetails.photoURL}
             replyTo={commentDetails.username}
           />
           <div className="mt-4">

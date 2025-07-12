@@ -72,7 +72,7 @@ export default function PostDetail() {
               <div className="mb-5 flex items-center justify-between">
                 <div className="flex space-x-3">
                   <img
-                    src={post?.photoURL || "/assets/User.png"}
+                    src={post?.photoURL || "https://i.imgur.com/zKbL9ih.png"}
                     width={44}
                     height={44}
                     alt="Profile Picture"
@@ -83,7 +83,11 @@ export default function PostDetail() {
                     }}
                   />
                   <div className="flex flex-col text-[15px]">
-                    <span className="font-bold">{post?.name || "Unknown"}</span>
+                    <Link to={`/ashtag/user/${post?.username}`}>
+                    <span className="font-bold hover:underline">
+                      {post?.name || "Unknown"}
+                    </span>
+                    </Link>
                     <span className="text-[#939fa8]">
                       @{post?.username || "unknown"}
                     </span>
@@ -127,6 +131,7 @@ interface Comment {
   name: string;
   text: string;
   username: string;
+  photoURL: string;
 }
 
 function Comment({ comment }: { comment: Comment }) {
@@ -136,6 +141,7 @@ function Comment({ comment }: { comment: Comment }) {
         name={comment.name}
         username={comment.username}
         text={comment.text}
+        photoURL={comment.photoURL}
       />
 
       <div className="ms-16 flex space-x-14 p-3">

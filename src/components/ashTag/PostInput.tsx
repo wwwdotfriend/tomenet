@@ -38,7 +38,7 @@ export default function PostInput({ insideModal }: PostInputProps) {
   const dispatch = useDispatch();
   const auth = getAuth();
   const currentUser = auth.currentUser;
-  let photoURL = "";
+  let photoURL = user.photoURL;
 
   if (currentUser) {
     photoURL = currentUser.photoURL || "";
@@ -58,6 +58,7 @@ export default function PostInput({ insideModal }: PostInputProps) {
       timestamp: serverTimestamp(),
       likes: [],
       comments: [],
+      photoURL: currentUser?.photoURL || "https://i.imgur.com/zKbL9ih.png"
     });
 
     setText("");
@@ -71,6 +72,7 @@ export default function PostInput({ insideModal }: PostInputProps) {
         name: user.name,
         username: user.username,
         text: text,
+        photoURL: user.photoURL
       }),
     });
 
