@@ -15,9 +15,9 @@ A React webapp to supplement D&D campaigns set at Ember Coast University, the mo
 ## Introduction
 TomeNet is a React-based web application that serves as a personalized command center for D&D players navigating life at a magical university.
 
-Built as both an immersive campaign tool and a learning project for modern web development, TomeNet helps players manage their characters, participate in campus social life, track quests, and stay connected with their party members.
+Built as both an immersive campaign tool and a learning project for webdev, TomeNet helps players manage their characters, participate in campus social life, track quests, and stay connected with their party members.
 
-## Features (ALL W.I.P)
+## W.I.P. Features
 **Social & Communication**
 - AshTag social feed (inspired by Twitter) for in-universe interactions
 - Party messaging system with private and group chats
@@ -42,15 +42,13 @@ Built as both an immersive campaign tool and a learning project for modern web d
 - Weather system and daily campus life
 - Academic achievement tracking
 
-## Getting Started
+## Build Instructions
 
 ### Prerequisites
-
 - Node.js (version 16 or higher)
 - npm or yarn package manager
 
 ### Installation
-
 1. Clone the repository
 ```bash
 git clone https://github.com/yourusername/tomenet.git
@@ -70,7 +68,7 @@ npm run dev
 4. Open your browser to `http://localhost:5173`
 
 ## Contributing
-We welcome contributions to TomeNet! Whether you're fixing bugs, adding new features, or improving documentation, your help makes the project better for everyone.
+Contributions to TomeNet are more than welcome! Whether you're fixing bugs, adding new features, or improving documentation, your help makes the project better for everyone.
 
 ### Development Guidelines
 1. Follow the existing code style and TypeScript patterns
@@ -80,5 +78,4 @@ We welcome contributions to TomeNet! Whether you're fixing bugs, adding new feat
 5. Update documentation when adding new features
 
 ### Getting Help
-
-If you encounter issues or have questions about the codebase, feel free to open an issue or reach out to me on discord at `internetfriend`!
+FOr any questions, comments, or concerns, feel free to open an issue or reach out to me on discord at `internetfriend`!
